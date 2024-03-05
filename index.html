@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Tracking Land</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <meta name="description" content="your favorite lands in the palm of your hand!">
+</head>
+
+<style>
+    body {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        background-color: black;
+        color: white;
+        font-weight: 800;
+        cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=), auto;
+    }
+
+    .iframeDiv{
+        padding-bottom:44vh; 
+        position:relative; 
+        display:inline-block; 
+        width: 49%; 
+        border: 1px solid #ffffff;
+    }
+    .number{
+        position: absolute;
+        border: 1px solid #666666;
+        background: #0617ff26;
+        border-radius: 5px;
+        padding: 5px;
+        left: 0;
+        right: 0;
+        width: fit-content;
+        margin: auto;
+        margin-top: 10px;
+        color: #ffffff;
+        font-weight: bold;
+        font-family: cursive;
+        z-index: 1;
+    }
+    .number.left{left: 100px;}
+    .number.right{right: 100px;}
+    #modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        text-align: center;
+        z-index: 1;
+    }
+
+    .modalinfo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: black;
+        font-family: math;
+    }
+    .modalinfo span{
+        color: #1500ff;
+    }
+
+    .close{
+        position: absolute;
+        right: 0;
+        margin-right: 20px;
+        border: 0;
+        font-size: 20px;
+        font-weight: 800;
+    }
+    /* .modalbutton{position: absolute;right:30px;} */
+    .copy{padding: 5px;}
+    .left{float: left;}
+    .right{float: right;}
+    .right img{width: 13px; height: auto; margin-right: 5px;}
+
+</style>
+<body>
+    <br>
+        <label for="parametro1">Land Number: </label>
+        <input type="number" id="parametro1" name="parámetro1">
+        <input type="checkbox" id="check1">
+        <input type="number" id="parametro2" name="parámetro2">
+        <input type="checkbox" id="check2">
+        <input type="number" id="parametro3" name="parámetro3">
+        <input type="checkbox" id="check3">
+        <input type="number" id="parametro4" name="parámetro4">
+        <input type="checkbox" id="check4">
+        <button id="actualizar">Refresh</button>
+        <button id="buscar">Find</button>
+        <button id="next">Next</button>
+        <button id="back">Back</button>
+        <button id="random">Random</button>
+        <button onclick="openModal()">Info</button>
+    <hr>
+
+    <div class="iframeDiv">
+        <div class="number" id="number1" onclick="copy(event)"></div>
+        <iframe width="100%" height="100%" id="resultadoIframe1"
+            src=""
+            frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+        </iframe>
+    </div>
+    <div class="iframeDiv">
+        <div class="number" id="number2" onclick="copy(event)"></div>
+        <iframe width="100%" height="100%" id="resultadoIframe2"
+            src=""
+            frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+        </iframe>
+    </div>
+    <div class="iframeDiv">
+        <div class="number" id="number3" onclick="copy(event)"></div>
+        <iframe width="100%" height="100%" id="resultadoIframe3"
+            src=""
+            frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+        </iframe>
+    </div>
+    <div class="iframeDiv">
+        <div class="number" id="number4" onclick="copy(event)"></div>
+        <iframe width="100%" height="100%" id="resultadoIframe4"
+            src=""
+            frameborder="0" allowfullscreen="" style="position:absolute; top:0; left: 0">
+        </iframe>
+    </div>
+    <!-- <iframe id="resultadoIframe" src="" frameborder="0"></iframe> -->
+    <div class="copy">
+        <div class="left">Made By Profion</div>
+        <div class="right">Donations Ronin Wallet <img src="https://katana.roninchain.com/static/media/ron.98041023.svg" alt="">0xe4932d18cbba6bd55c2ce3b6d4941436d12aae63</div></div>
+    <script src="script/script.js"></script>
+
+    <div class="modal" id="modal">
+        <div class="modalinfo">
+            <button onclick="closeModal()" class="close">X</button>
+            <h1>Info</h1>
+            <hr>
+            You can change a land number and only one window will be updated.
+            <br><br>
+            This project will always be free.
+            <br><br>
+            If you want to help with a donation to improve the project.
+            <br><br>
+            this is my Ronins Wallet <span>0xe4932d18cbba6bd55c2ce3b6d4941436d12aae63</span> 
+            <br><br>
+            Any Sugestion DM Discord: Profion#9014
+
+            <hr>
+            Puedes cambiar un Número de terreno y solo una ventana se actualizara.
+            <br> <br>
+            Este proyecto siempre sera gratuito.
+            <br> <br>
+            Si deseas ayudar con una donación para mejorar el proyecto.
+            <br> <br>
+            Esta es Ronins Wallet <span>0xe4932d18cbba6bd55c2ce3b6d4941436d12aae63</span> 
+            <br> <br>
+            Alguna Sugerencia DM Discord: Profion#9014
+            <br> <br>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</body>
+</html>
